@@ -12,7 +12,7 @@ import (
 
 func main() {
 	json, _ := getJsonValues("input.json")
-	json2, _ := getJsonValues("example2.json")
+	json2, _ := getJsonValues("input.json")
 	getSum1(json)
 	getSum2(json2)
 }
@@ -48,29 +48,23 @@ func getSum1(values string) {
 }
 
 func getSum2(values string) {
-	numberEnum := map[string]string{
-		"one":   "o1ne",
-		"two":   "t2wo",
-		"three": "th3ree",
-		"four":  "f4our",
-		"five":  "fi5ve",
-		"six":   "si6x",
-		"seven": "se7ven",
-		"eight": "ei8ght",
-		"nine":  "ni9ne",
-	}
-
 	splitedValue := strings.Fields(values)
 
 	var accumulatedValue uint64 = 0
 
 	for _, word := range splitedValue {
-		matchTextNumbers := regexp.MustCompile("(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)")
-		replaceStringToNumber := matchTextNumbers.ReplaceAllStringFunc(word, func(v string) string {
-			return numberEnum[v]
-		})
-		fmt.Println("spl: ", replaceStringToNumber)
-		splitedWord := strings.Split(replaceStringToNumber, "")
+
+		word = strings.ReplaceAll(word, "one", "o1ne")
+		word = strings.ReplaceAll(word, "two", "t2wo")
+		word = strings.ReplaceAll(word, "three", "th3ree")
+		word = strings.ReplaceAll(word, "four", "f4our")
+		word = strings.ReplaceAll(word, "five", "fi5ve")
+		word = strings.ReplaceAll(word, "six", "si6x")
+		word = strings.ReplaceAll(word, "seven", "se7ven")
+		word = strings.ReplaceAll(word, "eight", "ei8ght")
+		word = strings.ReplaceAll(word, "nine", "ni9ne")
+
+		splitedWord := strings.Split(word, "")
 		var sliceNumbers []string
 
 		for _, letter := range splitedWord {
